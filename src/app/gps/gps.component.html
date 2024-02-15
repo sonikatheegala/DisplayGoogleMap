@@ -1,0 +1,28 @@
+<div class="outer-wrapper">
+  <div class="map-wrapper" id="wrapper" #wrapper>
+    <agm-map [usePanning]="true"
+      [latitude]="lat"
+      [longitude]="lng"
+      [scrollwheel]="true"
+      [zoom]="zoom" 
+      [disableDefaultUI]="false" (idle)="idle()"
+      (centerChange)="centerChange($event)"
+      id="AgmMap"
+      #AgmMap >
+      <agm-marker
+          *ngFor="let m of markers; let i = index"
+          [latitude]="m.lat"
+          [longitude]="m.lng"
+          [markerDraggable]="m.draggable">
+        <agm-info-window>
+          <strong>Label: {{m.label}}</strong><br/>
+          <strong>Latitude: {{m.lat}}</strong><br/>
+          <strong>Longitude: {{m.lng}}</strong>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+</div>
+<div style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;background-color: #000000;opacity: 0.5;z-index: 1500 !important;" *ngIf="showLoading">
+  <i class="pi pi-spin pi-spinner" style="position: fixed;top:50%; left:50%; font-size: 5rem; color:#fff;"></i>
+</div>
